@@ -1,7 +1,11 @@
+using System;
+
 namespace CwiczeniaRESTAPI.SeedWork
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
-        
+        void Commit();
+
+        void RollbackChanges();
     }
 }

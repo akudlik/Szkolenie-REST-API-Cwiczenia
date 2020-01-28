@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 
 namespace CwiczeniaRESTAPI.SeedWork
@@ -12,7 +11,7 @@ namespace CwiczeniaRESTAPI.SeedWork
             Value = value;
         }
 
-        public static Result Ok(T value)
+        public static Result<T> Ok(T value)
         {
             return new Result<T>(value, true, null);
         }

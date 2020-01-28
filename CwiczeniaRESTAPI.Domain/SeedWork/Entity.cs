@@ -7,7 +7,7 @@ namespace CwiczeniaRESTAPI.SeedWork
         public virtual int Id
         {
             get => _Id;
-            protected set => _Id = value;
+            set => _Id = value;
         }
     }
 }

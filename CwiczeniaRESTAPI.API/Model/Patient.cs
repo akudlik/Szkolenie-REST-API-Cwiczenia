@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using CwiczeniaRESTAPI.AggregatesModel.MedicalReportAggregate;
-using CwiczeniaRESTAPI.SeedWork;
 
-namespace CwiczeniaRESTAPI.AggregatesModel.PatientAggregate
+namespace CwiczeniaRESTAPI.API.Model
 {
-    public class Patient : Entity, IAggregateRoot
+    public class Patient 
     {
+        public int Id { get; set; }
+        
         public virtual string Name { get; set; }
 
         public virtual string Surname { get; set; }
@@ -25,11 +25,10 @@ namespace CwiczeniaRESTAPI.AggregatesModel.PatientAggregate
         public virtual string EmailAddress { get; set; }
         
         [IgnoreDataMember]
-        public virtual ICollection<MedicalReport> MedicalReports { get; set; }
+        public virtual IList<MedicalReport> MedicalReports { get; set; }
         
         public virtual bool Active { get; set; }
     }
-
     public class Address 
     {
         public virtual string Street { get; set; }

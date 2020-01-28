@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CwiczeniaRESTAPI.Domain.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CwiczeniaRESTAPI.Infrastructure.Tests", "CwiczeniaRESTAPI.Infrastructure.Tests\CwiczeniaRESTAPI.Infrastructure.Tests.csproj", "{63595B56-6B79-4076-8D04-B8D0A8418486}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CwiczeniaRESTAPI.API", "CwiczeniaRESTAPI.API\CwiczeniaRESTAPI.API.csproj", "{59267B12-E44F-4E2A-BE6F-D5D113ACDDFC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{63595B56-6B79-4076-8D04-B8D0A8418486}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{63595B56-6B79-4076-8D04-B8D0A8418486}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{63595B56-6B79-4076-8D04-B8D0A8418486}.Release|Any CPU.Build.0 = Release|Any CPU
+		{59267B12-E44F-4E2A-BE6F-D5D113ACDDFC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{59267B12-E44F-4E2A-BE6F-D5D113ACDDFC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{59267B12-E44F-4E2A-BE6F-D5D113ACDDFC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{59267B12-E44F-4E2A-BE6F-D5D113ACDDFC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

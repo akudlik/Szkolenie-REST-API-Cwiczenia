@@ -1,10 +1,9 @@
-using System.Collections;
 using System.Collections.Generic;
 using CwiczeniaRESTAPI.SeedWork;
 
 namespace CwiczeniaRESTAPI.AggregatesModel.PatientAggregate
 {
-    public interface IPatientRepository : IRepository<Patient>
+    public interface IPatientRepository:IRepository<Patient>
     {
         Result<IEnumerable<Patient>> GetListOfPatients(int pageSize, int pageNumber);
         
