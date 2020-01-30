@@ -51,7 +51,9 @@ namespace CwiczeniaRESTAPI.Infrastructure.Repositories
 
         public Result DeletePatient(int id)
         {
-            Session.Delete(id);
+            var result = GetOnePatient(id);
+            
+            Session.Delete(result.Value);
 
             return Result.Ok();
         }
