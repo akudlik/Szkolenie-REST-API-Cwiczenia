@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using AutoMapper;
@@ -17,6 +19,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NHibernate.Util;
+using Swashbuckle.AspNetCore.Swagger;
+using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace CwiczeniaRESTAPI.API
 {
@@ -61,6 +65,21 @@ namespace CwiczeniaRESTAPI.API
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             InitializeAutoMapper();
             RegisterServices(services);
+            
+            services.AddSwaggerGen(swaggerConfig =>
+            {
+                swaggerConfig.SwaggerDoc("v1", new Info
+                {
+                    Title = "Cwiczenie REST API",
+                    Version = "1"
+                });
+                //For generate Swagger from comments
+                var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+                var xmlPath = Path.Combine(AppContext.BaseDirectory, xmlFile);
+                swaggerConfig.IncludeXmlComments(xmlPath);
+
+           //     swaggerConfig.EnableAnnotations();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -82,6 +101,13 @@ namespace CwiczeniaRESTAPI.API
 
             app.UseHttpsRedirection();
             app.UseMvc();
+            
+            app.UseSwagger();
+            app.UseSwaggerUI(ui =>
+            {
+                ui.DocExpansion(DocExpansion.List);
+                ui.SwaggerEndpoint("/swagger/v1/swagger.json", "V1");
+            });
         }
         
         private void InitializeAutoMapper()

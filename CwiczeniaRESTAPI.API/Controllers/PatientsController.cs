@@ -1,7 +1,9 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using CwiczeniaRESTAPI.AggregatesModel.PatientAggregate;
+using CwiczeniaRESTAPI.API.Model;
 using Microsoft.AspNetCore.Mvc;
+using Patient = CwiczeniaRESTAPI.API.Model.Patient;
 
 namespace CwiczeniaRESTAPI.API.Controllers
 {
@@ -18,9 +20,9 @@ namespace CwiczeniaRESTAPI.API.Controllers
 
         [HttpGet]
         [Route("")]
-        public IActionResult GetAllPatients()
+        public IActionResult GetAllPatients([FromQuery] Pagination pagination)
         {
-            var listOfPatients = _patientRepository.GetListOfPatients(100, 0);
+            var listOfPatients = _patientRepository.GetListOfPatients(pagination.PageSize, pagination.PageNumber);
             var mappedPatients = AutoMapper.Mapper.Map<IList<Patient>>(listOfPatients.Value);
             return Ok(mappedPatients);
         }
@@ -31,6 +33,10 @@ namespace CwiczeniaRESTAPI.API.Controllers
         {
             var listOfPatients = _patientRepository.GetOnePatient(patientId);
             var mappedPatients = AutoMapper.Mapper.Map<Patient>(listOfPatients.Value);
+
+            if (mappedPatients == null)
+                return NotFound("Not found patient");
+            
             return Ok(mappedPatients);
         }
 
@@ -38,7 +44,8 @@ namespace CwiczeniaRESTAPI.API.Controllers
         [Route("")]
         public IActionResult CreatePatient([FromBody] Patient patient)
         {
-            var listOfPatients = _patientRepository.CreatePatient(patient);
+            var domain = AutoMapper.Mapper.Map<CwiczeniaRESTAPI.AggregatesModel.PatientAggregate.Patient>(patient);
+            var listOfPatients = _patientRepository.CreatePatient(domain);
             var mappedPatients = AutoMapper.Mapper.Map<Patient>(listOfPatients.Value);
             return Ok(mappedPatients);
         }
@@ -47,11 +54,12 @@ namespace CwiczeniaRESTAPI.API.Controllers
         [Route("{patientId:int}")]
         public IActionResult UpdatePatient([Required] int patientId, [FromBody] Patient patient)
         {
-            var listOfPatients = _patientRepository.UpdatePatient(patient);
+            var domain = AutoMapper.Mapper.Map<CwiczeniaRESTAPI.AggregatesModel.PatientAggregate.Patient>(patient);
+            var listOfPatients = _patientRepository.UpdatePatient(domain);
             return NoContent();
         }
-        
-        
+
+
         [HttpDelete]
         [Route("{patientId:int}")]
         public IActionResult DeletePatient([Required] int patientId)
